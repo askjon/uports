@@ -1,0 +1,31 @@
+#!/bin/bash
+# uports main interface
+set -eu
+
+source config
+
+# build [pkg-name]
+buildpkg=$1
+
+
+if [ -d "$buildpkg" ]
+then
+	pushd $buildpkg
+
+elif [ -d "/*/$buildpkg" ]
+then
+	pushd "/*/$buildpkg"
+
+else
+	exit 1
+fi
+
+rm -fr $portsdir/tmp/*
+
+./build
+
+popd
+
+pushd $portsdir/tmp
+tar cvf $portsdir/pkgs/$buildpkg.tar ./
+popd

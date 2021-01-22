@@ -1,0 +1,9 @@
+#!/bin/bash
+# This file is the main config for
+# uports
+
+
+target=x86_64-unknown-linux-gnu
+portsdir=$(realpath .)
+
+

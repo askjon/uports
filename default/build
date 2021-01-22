@@ -1,0 +1,28 @@
+#!/bin/bash
+# default Build Script for uports
+# Copy to add a port
+set -eu
+
+
+pkg=
+version=
+pkg_link=
+specific=$pkg-$version
+
+config_conf=
+make_conf=
+install_conf=
+
+pushd $portsdir/dwn
+wget $pkg_dwn
+popd
+
+pushd $portsdir/cache
+tar $portsdir/dwn/${specific}*
+pushd $specific
+
+	./configure $config_conf
+	./make $make_conf
+	./install $install_conf
+popd
+popd
